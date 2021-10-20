@@ -1,26 +1,36 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { useState, useEffect } from 'react'
+import * as C from './App.styles'
+import { Item } from './types/Item'
+import { Category } from './types/Category'
+import { categories } from './data/categories'
+import { items } from './data/items'
+import { getCurrentMount, filterListByMonth } from './helpers/dateFilter'
+import { TableArea } from './components/TableArea'
 
-function App() {
+
+const App = () => {
+  const [list, steList] = useState(items);
+  const [filteredList, setFilteredListed] = useState<Item[]>([]);
+  const [currentMonth, setCurrentMount] = useState( getCurrentMount())
+
+  useEffect(()=>{
+    setFilteredListed( filterListByMonth(list, currentMonth) )
+  }, [list, currentMonth])
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <C.Container>
+      <C.Header>
+        <C.HeaderText>Sistema Financeiro</C.HeaderText>
+      </C.Header>
+      <C.Body>
+        {/* area de info */}
+
+        {/* area de insercao */}
+
+        <TableArea list = {filteredList} />
+      </C.Body>
+    </C.Container>
+  )
 }
 
-export default App;
+export default App
