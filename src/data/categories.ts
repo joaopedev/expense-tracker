@@ -1,5 +1,7 @@
-export const categories = {
-    food: { tittle: 'Alimentacao', color: 'blue', expense: true},
-    rent: { tittle: 'Aluguel', color: 'brown', expense: true},
+import { Category } from "../types/Category"
+
+export const categories: Category = {
+    food: { title: 'Alimentacao', color: 'blue', expense: true},
+    rent: { title: 'Aluguel', color: 'brown', expense: true},
     salary: {title: 'Salario', color: 'green', expense: false}
 }
